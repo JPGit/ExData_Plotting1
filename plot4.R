@@ -47,8 +47,39 @@ tbl <- read.csv.sql("dataset\\household_power_consumption.txt"
 
 # plot 
 
- # Simple plot of power over time using plot.default
-png("plot3.png", width = 480, height = 480, units = 'px');
+#png("plot4.png", width = 480, height = 480, units = 'px');
+
+# 2 x 2 graphs
+par(mfrow=c(2,2));
+par(mfrow=c(1,1));
+#
+# 1 - power
+#
+
+plot(  x=tbl$Global_active_power, type = "l", main="", xaxt = "n",
+       xlab="",
+       ylab="Global Active Power (kilowatts)"
+);
+# define 3 x-axis labels : 0, Middle, Last, label Thu, Fri, Sat
+axis(1, at=c(0,length(tbl$Global_active_power)/2,length(tbl$Global_active_power)), 
+     labels=c("Thu", "Fri", "Sat"));
+
+#
+#  #2 - Voltage
+#
+plot(  x=tbl$Voltage, type = "l", main="", xaxt = "n",
+       xlab="datetime",
+       ylab="Voltage"
+);
+
+# define 3 x-axis labels : 0, Middle, Last, label Thu, Fri, Sat
+axis(1, at=c(0,length(tbl$Voltage)/2,length(tbl$Voltage)), 
+     labels=c("Thu", "Fri", "Sat"));
+
+
+#
+#   #3 - Submetering
+#
 
 plot(  x=tbl$Sub_metering_1, type = "l", main="", xaxt = "n",
          xlab="",
@@ -63,8 +94,8 @@ axis(1, at=c(0,length(tbl$Global_active_power)/2,length(tbl$Global_active_power)
 
 # legend
 legend("topright", legend=c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3")
-    ,lty=c(1,1)   
-    ,col=c("black", "red", "blue")
+       ,lty=c(1,1)   
+       ,col=c("black", "red", "blue")
 );
-dev.off();
+#dev.off();
 
