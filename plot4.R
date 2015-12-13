@@ -47,11 +47,12 @@ tbl <- read.csv.sql("dataset\\household_power_consumption.txt"
 
 # plot 
 
-#png("plot4.png", width = 480, height = 480, units = 'px');
+png("plot4.png", width = 480, height = 480, units = 'px');
 
 # 2 x 2 graphs
 par(mfrow=c(2,2));
-par(mfrow=c(1,1));
+#par(mfrow=c(1,1));
+
 #
 # 1 - power
 #
@@ -97,5 +98,19 @@ legend("topright", legend=c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"
        ,lty=c(1,1)   
        ,col=c("black", "red", "blue")
 );
-#dev.off();
+
+#
+#  #4 - Global_reactive_power
+#
+plot(  x=tbl$Global_reactive_power, type = "l", main="", xaxt = "n",
+       xlab="datetime",
+       ylab="Global_reactive_power"
+);
+
+# define 3 x-axis labels : 0, Middle, Last, label Thu, Fri, Sat
+axis(1, at=c(0,length(tbl$Global_reactive_power)/2,length(tbl$Global_reactive_power)), 
+     labels=c("Thu", "Fri", "Sat"));
+
+
+dev.off();
 
